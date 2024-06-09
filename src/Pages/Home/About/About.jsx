@@ -4,8 +4,8 @@ const About = () => {
     return (
         <div className="hero min-h-screen bg-base-200 ">
         <div className="hero-content flex-col lg:flex-row ">
-            <div className='lg:w-1/2 relative h-30 w-40  rounded-md '>
-            <img src={img7} className="max-w-sm rounded-lg shadow-2xl" />
+            <div className='lg:w-1/2 relative h-30 w-40  rounded-md  mr-10  '>
+            <img src={img7} className="max-w-sm  rounded-lg shadow-2xl" />
              
           <img  src={img8} className="max-w-sm absolute w-60 h-30 
           right-7 border-8 border-white top-24 rounded-lg shadow-2xl" />
