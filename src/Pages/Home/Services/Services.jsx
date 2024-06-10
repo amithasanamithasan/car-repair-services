@@ -23,7 +23,7 @@ useEffect(()=>{
                 <p className="text-xl text-center">words which donot look even slightly believable. </p>
                 </div>
                <div>
-                <p>services:{services.length}</p>
+               
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-4">
                 {
                     services?.map(service=> <ServicesCard key={service.id} service={service}></ServicesCard>)
