@@ -2,7 +2,7 @@
 import { FaArrowRight } from "react-icons/fa6";
 
 const ServicesCard = ({service}) => {
-    const{_id,service_id,img,price ,title,name}=service;
+    const{_id,service_id,img,price ,title}=service;
     return (
         <div className="card bg-base-100 shadow-xl">
   <figure className="px-10 pt-10">
