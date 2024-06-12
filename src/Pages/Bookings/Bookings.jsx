@@ -34,6 +34,32 @@ const handleDeleted= id=>{
         
     }
     }
+// update api
+    const handelBookingconfirm=id=>{
+
+        fetch(`http://localhost:5000/booked/${id}`,{
+            method:'PATCH',
+         headers:{
+            'content-type':'application/json'
+           },
+           body:JSON.stringify({status:'confirm'})
+
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            if(data.modifiedCount>0){
+                //update state kaj hobe 
+                const remainig = bookings.filter(book=> book._id !== id);
+                const update =bookings.find(book=> book._id === id);   
+                update.status='confirm'
+              const newBooking=[update, ...remainig];
+              setBookings(newBooking);
+            }
+        })
+
+
+    }
     return (
     
                <div>
@@ -65,6 +91,7 @@ const handleDeleted= id=>{
                      key={book._id}
                     book={book}
                    handleDeleted={handleDeleted}
+                   handelBookingconfirm={handelBookingconfirm}
              ></Bookingrow>)
              }
                     </tbody>

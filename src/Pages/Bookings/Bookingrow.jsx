@@ -1,9 +1,9 @@
 
 
-const Bookingrow = ({book,handleDeleted}) => {
+const Bookingrow = ({book,handleDeleted ,handelBookingconfirm}) => {
 
 
- const{ _id, Customername,email,date, service ,img,price ,massage ,phone}=book;
+ const{ _id, Customername,email,date, service ,img,price ,massage ,phone,status}=book;
 
 
 
@@ -30,7 +30,14 @@ const Bookingrow = ({book,handleDeleted}) => {
         <td className="text-1xl text-white font-semibold">{massage}</td>
         <td className="text-1xl text-white font-semibold">{phone}</td>
         <th>
-            
+        <th>
+         { 
+         status=='confirm'? <span className="font-bold text-purple-800 ">Approvel</span> 
+         :
+         <button onClick={()=> handelBookingconfirm(_id)}
+             className="btn btn-primarey bg-cyan-800 btn-xs">
+          Please Confirm</button>}
+        </th>
         </th>
     </tr>
     );
