@@ -1,4 +1,4 @@
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import login from'../../assets/login.svg'
 import { useContext, useState } from 'react';
 import { Authcontext } from '../../Providers/AuthProviders';
@@ -6,12 +6,14 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 const Login = () => {
+  
 const{ signIn}=useContext(Authcontext)
 
 const[success, setSuccess]=useState('');
+
 const[errormessage,setErrormessage]= useState('');
 
-// const navigate=useNavigate()
+ const navigate=useNavigate()
 
  const handellogin=event=>{
     event.preventDefault()
@@ -26,13 +28,16 @@ const[errormessage,setErrormessage]= useState('');
       console.log(loggedInUser);
       const user={ email };
 
-      axios.post('http://localhost:5000/jwt', user)
+      axios.post('http://localhost:5000/jwt', user,{withCredentials:true})
       .then(res=>{
         console.log(res.data)
+        if(res.data.success){
+   navigate(location?.state? location.state:'/');
+        }
       })
        toast.success('User logged in successfully');
       setSuccess('User logged in!');
-      // navigate(location?.state? location.state:'/');
+   
       // get acccess token
     })
     .catch(error=>{
