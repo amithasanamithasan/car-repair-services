@@ -1,10 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import login from'../../assets/login.svg'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Authcontext } from '../../Providers/AuthProviders';
+import toast from 'react-hot-toast';
 
 const Login = () => {
-const{signIn}=useContext(Authcontext)
+const{ signIn}=useContext(Authcontext)
+
+const[success, setSuccess]=useState('');
+const[errormessage,setErrormessage]= useState('');
+
+const navigate=useNavigate()
 
  const handellogin=event=>{
     event.preventDefault()
@@ -12,15 +18,20 @@ const{signIn}=useContext(Authcontext)
     const email=form.email.value
     const password=form.password.value
     console.log(email,password);
-    signIn(email.password)
+
+    signIn(email,password)
     .then(result=>{
-      const user=result.user
-      console.log(user)
-      alert('user created successfully')
-      })
-      .catch(error=>{
-        console.log(error)
-      })
+      console.log(result.user)
+       toast.success('User logged in successfully');
+      setSuccess('User logged in!');
+      navigate(location?.state? location.state:'/');
+    })
+    .catch(error=>{
+     console.log(error)
+     toast.error('Email doesnot match');
+     setErrormessage('Login failed. Please check your credentials and try again.');
+   
+    })
 
  }
 
@@ -58,6 +69,15 @@ const{signIn}=useContext(Authcontext)
           <input   className="btn bg-orange-800 text-white" type="submit" value="Sign In"  />
         </div>
       </form>
+
+
+      {
+    success&& <p className="text-2xl text-green-600"> User LOG_IN succesFully</p>
+            }
+            {
+    errormessage && <p className= "right-3 py-3 font-serif text-center text-red-600">{errormessage} </p>
+}
+
 
     <p className='text-center'>Have an account?  <Link to='/signup'><span className='text-red-500'> Sign In</span></Link> </p>
     </div>

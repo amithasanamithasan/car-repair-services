@@ -4,6 +4,10 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/SignUp/Signup";
 
+import BookService from "../Pages/BookService/BookService";
+import Bookings from "../Pages/Bookings/Bookings";
+import Privetroutes from "./Privetroutes/Privetroutes";
+
 
 
 
@@ -17,13 +21,23 @@ const router = createBrowserRouter([
         element:<Home></Home>,
         },
         {
-          path:'/login',
+          path:'login',
           element:<Login></Login>,
         },
         {
-          path:'/signup',
+          path:'signup',
           element:<Signup></Signup>,
         },
+        {
+          path:'book/:id',
+          element:<BookService></BookService>,
+          loader:({params}) =>fetch(`http://localhost:5000/service/${params.id}`)
+        },
+        {
+          path:'bookings',
+          element:<Privetroutes><Bookings></Bookings></Privetroutes>
+      
+        }
     ]
     },
   ]);

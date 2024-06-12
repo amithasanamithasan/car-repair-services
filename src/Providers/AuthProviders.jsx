@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 
@@ -17,6 +17,11 @@ const signIn=(email,password)=>{
 return signInWithEmailAndPassword(auth,email,password)
 }
 
+const logOut=()=>{
+    setLoading(true);
+    return signOut(auth) 
+}
+
 // onAuthStateChange use korar karon ,ata akt API re call korbe jokon amr system ta ready,
 // hobe tokon dekbe user gula ace kina nie ,sie jonno amr useEffect daie 
 //  unsubscribe korar karon hocche, tumi akta jinis observe koteco,
@@ -26,7 +31,7 @@ return signInWithEmailAndPassword(auth,email,password)
 useEffect(()=>{
 const unsubscribe =onAuthStateChanged(auth,curretuser=>{
     setUsers(curretuser);
-    console.log('current user ',curretuser);
+
     setLoading(false)
    })
    return()=>{
@@ -43,6 +48,7 @@ user,
 creatUser,
 loading,
 signIn,
+logOut
  }
 
     
