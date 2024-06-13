@@ -1,13 +1,16 @@
 import { Link, useNavigate} from 'react-router-dom';
 import login from'../../assets/login.svg'
-import { useContext, useState } from 'react';
-import { Authcontext } from '../../Providers/AuthProviders';
+// import { useContext, useState } from 'react';
+// import { Authcontext } from '../../Providers/AuthProviders';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import useAuth from '../../Hooks/useAuth';
+import { useState } from 'react';
 
 const Login = () => {
   
-const{ signIn}=useContext(Authcontext)
+// const{ signIn}=useContext(Authcontext)
+const{signIn}=useAuth();
 
 const[success, setSuccess]=useState('');
 
