@@ -15,11 +15,15 @@ const[bookings, setBookings]=useState([]);
 const axiossecure=useAxiosSecure();
 
 // const url =`http://localhost:5000/booked?email=${user?.email}`;
+
 const url =`/booked?email=${user?.email}`;
+
 useEffect(()=>{
+
 // axios.get(url, {withCredentials:true})
 // .then(res=>{
 //     setBookings(res.data);
+
 axiossecure.get(url)
 .then(res=> setBookings(res.data))
 
