@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 
 export const Authcontext =createContext()
 const AuthProviders = ({children}) => {
@@ -29,10 +30,31 @@ const logOut=()=>{
 // kono karone aita chera dita chaw ba chole jaow ,tahole tumi r dhore rakte parba na,
 // sie jonno aikhan thake return korba  return unsubscribe();memory re ta ke jano dhore rakte na hoi sie khatre use kore
 useEffect(()=>{
-const unsubscribe =onAuthStateChanged(auth,curretuser=>{
-    setUsers(curretuser);
+const unsubscribe =onAuthStateChanged(auth,curretuser=>
+    {
+        const userEmail= curretuser?.email ||user?.email;
+        const loggeduser ={emai:userEmail};
+    
+        setUsers(curretuser);
 
     setLoading(false)
+    // if user exists then token
+    if(curretuser){
+       
+        axios.post('http://localhost:5000/jwt',loggeduser,{withCredential:true})
+        .then(res=>{
+            console.log('token response',res.data);
+        })
+    }
+    else{
+        axios.post('http://localhost:5000/logout',loggeduser,{
+            withCredentials:true
+        })
+        .thrn(res=>{
+            console.log(res.data);
+
+        })
+    }
    })
    return()=>{
     return unsubscribe();
